@@ -1,12 +1,8 @@
 package com.sitecasamento.laislevi.application.core.domain.DTOs;
 
 import com.sitecasamento.laislevi.application.core.domain.entities.AcompanhanteEntity;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
-@Getter
-@Setter
 public class AcompanhanteDTO {
 
     private Long id;
@@ -21,4 +17,27 @@ public class AcompanhanteDTO {
         BeanUtils.copyProperties(acompanhante, this);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public ConvidadoDTO getConvidadoDTO() {
+        return convidadoDTO;
+    }
+
+    public void setConvidadoDTO(ConvidadoDTO convidadoDTO) {
+        this.convidadoDTO = convidadoDTO;
+    }
 }

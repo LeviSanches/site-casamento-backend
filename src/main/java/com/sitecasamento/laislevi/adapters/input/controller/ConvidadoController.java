@@ -17,11 +17,13 @@ public class ConvidadoController {
     @Autowired
     private InsertConvidadoUseCase insertConvidadoUseCase;
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Void> insert(@RequestBody ConvidadoDTO convidado) {
         insertConvidadoUseCase.save(convidado);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 
 
 }
