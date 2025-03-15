@@ -7,7 +7,6 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "convidado")
@@ -33,9 +32,6 @@ public class ConvidadoEntity {
 
     public ConvidadoEntity(ConvidadoDTO convidadoDTO) {
         BeanUtils.copyProperties(convidadoDTO, this);
-        acompanhantes = convidadoDTO.getAcompanhantes().stream()
-                .map(AcompanhanteEntity::new)
-                .collect(Collectors.toList());
     }
 
     public Long getId() {

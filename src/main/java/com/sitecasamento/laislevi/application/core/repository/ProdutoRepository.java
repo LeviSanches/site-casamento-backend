@@ -1,4 +1,4 @@
-package com.sitecasamento.laislevi.application.ports.output;
+package com.sitecasamento.laislevi.application.core.repository;
 
 import com.sitecasamento.laislevi.application.core.domain.entities.ProdutoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
