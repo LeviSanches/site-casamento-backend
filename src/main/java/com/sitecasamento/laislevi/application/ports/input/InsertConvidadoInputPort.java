@@ -4,6 +4,6 @@ import com.sitecasamento.laislevi.application.core.domain.DTOs.ConvidadoDTO;
 
 public interface InsertConvidadoInputPort {
 
-    void save(ConvidadoDTO convidadoDTO);
+    void insert(ConvidadoDTO convidadoDTO);
 
 }

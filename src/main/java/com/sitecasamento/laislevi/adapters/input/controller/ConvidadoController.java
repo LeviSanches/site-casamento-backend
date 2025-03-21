@@ -4,7 +4,6 @@ import com.sitecasamento.laislevi.application.core.domain.DTOs.ConvidadoDTO;
 import com.sitecasamento.laislevi.application.core.usecase.DeleteConvidadoUseCase;
 import com.sitecasamento.laislevi.application.core.usecase.InsertConvidadoUseCase;
 import com.sitecasamento.laislevi.application.core.usecase.SearchConvidadoUseCase;
-import com.sitecasamento.laislevi.application.ports.input.DeleteConvidadoInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,7 @@ public class ConvidadoController {
 
     @PostMapping()
     public ResponseEntity<Void> insert(@RequestBody ConvidadoDTO convidado) {
-        insertConvidadoUseCase.save(convidado);
+        insertConvidadoUseCase.insert(convidado);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

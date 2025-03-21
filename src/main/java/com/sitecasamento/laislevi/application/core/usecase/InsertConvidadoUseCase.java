@@ -18,7 +18,7 @@ public class InsertConvidadoUseCase implements InsertConvidadoInputPort {
 
 
     @Override
-    public void save(ConvidadoDTO convidadoDTO) {
+    public void insert(ConvidadoDTO convidadoDTO) {
         if (convidadoDTO != null) {
             ConvidadoEntity convidado = new ConvidadoEntity(convidadoDTO);
             for (AcompanhanteDTO acompanhanteDTO : convidadoDTO.getAcompanhantes()) {

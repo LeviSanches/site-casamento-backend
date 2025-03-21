@@ -1,6 +1,9 @@
 package com.sitecasamento.laislevi.application.core.domain.DTOs;
 
+import com.sitecasamento.laislevi.application.core.domain.entities.PaymentEntity;
 import com.sitecasamento.laislevi.application.core.domain.entities.ProdutoEntity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import org.springframework.beans.BeanUtils;
 
 public class ProdutoDTO {
@@ -15,7 +18,13 @@ public class ProdutoDTO {
 
     private String categoria;
 
+    private String imagem;
+
     private Byte quantidade;
+
+    @ManyToOne
+    @JoinColumn(name = "convidado_id", nullable = false)
+    PaymentEntity paymentEntity;
 
     public ProdutoDTO() {}
 
@@ -61,6 +70,14 @@ public class ProdutoDTO {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public Byte getQuantidade() {

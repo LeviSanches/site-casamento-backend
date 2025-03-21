@@ -9,7 +9,7 @@ import org.springframework.beans.BeanUtils;
 public class ProdutoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Garante a geração automática do ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -23,6 +23,9 @@ public class ProdutoEntity {
 
     @Column(nullable = false)
     private String categoria;
+
+    @Column(nullable = false)
+    private String imagem;
 
     @Column(nullable = false)
     private Byte quantidade;
@@ -71,6 +74,14 @@ public class ProdutoEntity {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public Byte getQuantidade() {
