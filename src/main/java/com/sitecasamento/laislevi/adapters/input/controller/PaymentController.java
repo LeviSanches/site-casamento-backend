@@ -30,7 +30,7 @@ public class PaymentController {
 
         try {
             var response = paymentUseCase.createPayment(paymentDTO);
-            String jsonResponse = "{\"url\": \"" + response +"\"}";
+            String jsonResponse = "{\"url\": \"" + response + "\"}";
             return ResponseEntity.status(HttpStatus.OK).body(jsonResponse);
         } catch (Exception e) {
             e.printStackTrace();

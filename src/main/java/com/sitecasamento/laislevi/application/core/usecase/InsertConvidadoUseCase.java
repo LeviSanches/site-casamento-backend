@@ -22,7 +22,7 @@ public class InsertConvidadoUseCase implements InsertConvidadoInputPort {
         if (convidadoDTO != null) {
             ConvidadoEntity convidado = new ConvidadoEntity(convidadoDTO);
             for (AcompanhanteDTO acompanhanteDTO : convidadoDTO.getAcompanhantes()) {
-                if(acompanhanteDTO.getNome() != null) {
+                if(acompanhanteDTO.getNome().isBlank() || acompanhanteDTO.getNome().isEmpty()) {
                     AcompanhanteEntity acompanhante = new AcompanhanteEntity(acompanhanteDTO);
                     convidado.addAcompanhante(acompanhante);
                 }

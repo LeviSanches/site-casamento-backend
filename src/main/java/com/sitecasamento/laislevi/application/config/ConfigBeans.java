@@ -56,4 +56,8 @@ public class ConfigBeans {
         return new PaymentRepositoryAdapter();
     }
 
+    @Bean
+    public MercadoPagoService mercadoPagoService() {
+        return new MercadoPagoService();
+    }
 }

@@ -19,6 +19,8 @@ public class PaymentDTO {
 
     private String status;
 
+    private String mensagem;
+
     private List<ProdutoDTO> produtos = new ArrayList<>();
 
     public PaymentDTO() {
@@ -66,6 +68,14 @@ public class PaymentDTO {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
     public List<ProdutoDTO> getProdutos() {

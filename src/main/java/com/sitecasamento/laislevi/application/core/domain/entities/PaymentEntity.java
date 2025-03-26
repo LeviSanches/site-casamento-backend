@@ -4,9 +4,6 @@ import com.sitecasamento.laislevi.application.core.domain.DTOs.PaymentDTO;
 import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "pagamento")
 public class PaymentEntity {
@@ -26,6 +23,8 @@ public class PaymentEntity {
 
     @Column(nullable = true)
     private String status;
+
+    private String mensagem;
 
     public PaymentEntity() {
     }
@@ -66,11 +65,17 @@ public class PaymentEntity {
         this.status = status;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
+    public String getTelefone() { return telefone; }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 }

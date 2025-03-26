@@ -3,6 +3,7 @@ package com.sitecasamento.laislevi.application.core.usecase;
 import com.sitecasamento.laislevi.adapters.output.ProdutoRepositoryAdapter;
 import com.sitecasamento.laislevi.application.core.domain.DTOs.ProdutoDTO;
 import com.sitecasamento.laislevi.application.core.domain.entities.ProdutoEntity;
+import com.sitecasamento.laislevi.application.core.exceptions.InvalidArgumentException;
 import com.sitecasamento.laislevi.application.ports.input.InsertProdutoInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,5 +25,13 @@ public class InsertProdutoUseCase implements InsertProdutoInputPort {
                         produtoRepositoryAdapter.save(p);
                     });
         }
+    }
+
+    @Override
+    public int updateAvailability(Long id) {
+        if (id != null) {
+            return produtoRepositoryAdapter.updateAvailability(id);
+        }
+        throw new InvalidArgumentException("O ID passado para o UseCase veio nulo");
     }
 }

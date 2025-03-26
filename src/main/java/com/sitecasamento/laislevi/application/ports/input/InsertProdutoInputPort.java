@@ -7,4 +7,6 @@ import java.util.List;
 public interface InsertProdutoInputPort {
 
     void insert(List<ProdutoDTO> produto);
+
+    int updateAvailability(Long id);
 }

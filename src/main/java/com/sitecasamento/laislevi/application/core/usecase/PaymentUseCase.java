@@ -8,6 +8,7 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import com.sitecasamento.laislevi.adapters.output.PaymentRepositoryAdapter;
 import com.sitecasamento.laislevi.application.core.domain.DTOs.PaymentDTO;
+import com.sitecasamento.laislevi.application.core.domain.DTOs.ProdutoDTO;
 import com.sitecasamento.laislevi.application.core.domain.entities.PaymentEntity;
 import com.sitecasamento.laislevi.application.core.exceptions.InvalidArgumentException;
 import com.sitecasamento.laislevi.application.ports.input.PaymentInputPort;
@@ -22,6 +23,9 @@ public class PaymentUseCase implements PaymentInputPort {
 
     @Autowired
     private PaymentRepositoryAdapter paymentRepositoryAdapter;
+
+    @Autowired
+    private InsertProdutoUseCase insertProdutoUseCase;
 
     @Value("${mercado-pago.api-token}")
     private String tokenApi;
@@ -95,6 +99,7 @@ public class PaymentUseCase implements PaymentInputPort {
                                 .number(paymentDTO.getTelefone().substring(2))
                                 .build())
                         .build())
+                .additionalInfo(paymentDTO.getMensagem())
                 .autoReturn("all")
                 .binaryMode(true)
                 .marketplace("marketplace")
@@ -128,6 +133,13 @@ public class PaymentUseCase implements PaymentInputPort {
     public void insertPayment(PaymentDTO paymentDTO) {
         if (paymentDTO != null) {
             paymentRepositoryAdapter.save(new PaymentEntity(paymentDTO));
+            var idProduto = paymentDTO.getProdutos();
+            idProduto
+                    .forEach(p -> {
+                        if (p.getId() != null) {
+                            insertProdutoUseCase.updateAvailability(p.getId());
+                        }
+                    });
             return;
         }
         throw new InvalidArgumentException("Erro ao enviar dados para salvar no banco");
