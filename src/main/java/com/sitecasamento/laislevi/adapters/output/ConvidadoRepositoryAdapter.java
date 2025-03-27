@@ -4,9 +4,12 @@ import com.sitecasamento.laislevi.application.core.domain.entities.ConvidadoEnti
 import com.sitecasamento.laislevi.application.core.repository.ConvidadoRepositoy;
 import com.sitecasamento.laislevi.application.ports.output.ConvidadoRepositoryOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
+@Component
 public class ConvidadoRepositoryAdapter implements ConvidadoRepositoryOutputPort {
 
     @Autowired
@@ -23,7 +26,13 @@ public class ConvidadoRepositoryAdapter implements ConvidadoRepositoryOutputPort
     }
 
     @Override
+    public Optional<ConvidadoEntity> findById(Long id) {
+        return convidadoRepositoy.findById(id);
+    }
+
+    @Override
     public List<ConvidadoEntity> searchAll() {
         return convidadoRepositoy.findAll();
     }
+
 }

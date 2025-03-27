@@ -4,10 +4,12 @@ import com.sitecasamento.laislevi.application.core.domain.entities.ProdutoEntity
 import com.sitecasamento.laislevi.application.core.repository.ProdutoRepository;
 import com.sitecasamento.laislevi.application.ports.output.ProdutoRepositoryOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Component
 public class ProdutoRepositoryAdapter implements ProdutoRepositoryOutputPort {
 
     @Autowired

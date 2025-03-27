@@ -1,21 +1,20 @@
 package com.sitecasamento.laislevi.application.core.usecase;
 
-import com.sitecasamento.laislevi.adapters.output.ConvidadoRepositoryAdapter;
 import com.sitecasamento.laislevi.application.core.domain.DTOs.AcompanhanteDTO;
 import com.sitecasamento.laislevi.application.core.domain.DTOs.ConvidadoDTO;
 import com.sitecasamento.laislevi.application.core.domain.entities.AcompanhanteEntity;
 import com.sitecasamento.laislevi.application.core.domain.entities.ConvidadoEntity;
 import com.sitecasamento.laislevi.application.core.exceptions.InvalidArgumentException;
 import com.sitecasamento.laislevi.application.ports.input.InsertConvidadoInputPort;
-import com.sitecasamento.laislevi.application.core.repository.ConvidadoRepositoy;
 import com.sitecasamento.laislevi.application.ports.output.ConvidadoRepositoryOutputPort;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class InsertConvidadoUseCase implements InsertConvidadoInputPort {
 
-    @Autowired
-    private ConvidadoRepositoryAdapter convidadoRepositoryAdapter;
+    private final ConvidadoRepositoryOutputPort convidadoRepositoryOutputPort;
 
+    public InsertConvidadoUseCase(ConvidadoRepositoryOutputPort convidadoRepositoryOutputPort) {
+        this.convidadoRepositoryOutputPort = convidadoRepositoryOutputPort;
+    }
 
     @Override
     public void insert(ConvidadoDTO convidadoDTO) {
@@ -27,7 +26,7 @@ public class InsertConvidadoUseCase implements InsertConvidadoInputPort {
                     convidado.addAcompanhante(acompanhante);
                 }
             }
-            convidadoRepositoryAdapter.save(convidado);
+            convidadoRepositoryOutputPort.save(convidado);
             return;
         }
         throw new InvalidArgumentException("Erro ao inserir convidado");

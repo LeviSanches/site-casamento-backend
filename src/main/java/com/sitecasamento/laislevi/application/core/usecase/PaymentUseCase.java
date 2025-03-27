@@ -6,13 +6,11 @@ import com.mercadopago.client.preference.*;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
-import com.sitecasamento.laislevi.adapters.output.PaymentRepositoryAdapter;
 import com.sitecasamento.laislevi.application.core.domain.DTOs.PaymentDTO;
-import com.sitecasamento.laislevi.application.core.domain.DTOs.ProdutoDTO;
 import com.sitecasamento.laislevi.application.core.domain.entities.PaymentEntity;
 import com.sitecasamento.laislevi.application.core.exceptions.InvalidArgumentException;
 import com.sitecasamento.laislevi.application.ports.input.PaymentInputPort;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sitecasamento.laislevi.application.ports.output.PaymentRepositoryOutputPort;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.math.BigDecimal;
@@ -21,28 +19,25 @@ import java.util.List;
 
 public class PaymentUseCase implements PaymentInputPort {
 
-    @Autowired
-    private PaymentRepositoryAdapter paymentRepositoryAdapter;
+    private final PaymentRepositoryOutputPort paymentRepositoryOutputPort;
 
-    @Autowired
-    private InsertProdutoUseCase insertProdutoUseCase;
+    private final InsertProdutoUseCase insertProdutoUseCase;
 
     @Value("${mercado-pago.api-token}")
     private String tokenApi;
     @Value("${mercado-pago.urls.url-retorno}")
     private String urlRetorno;
-
     private Long id;
-
     private String nome;
-
     private BigDecimal preco;
-
     private String categoria;
-
     private String imagem;
-
     private Integer quantidade;
+
+    public PaymentUseCase(PaymentRepositoryOutputPort paymentRepositoryOutputPort, InsertProdutoUseCase insertProdutoUseCase) {
+        this.paymentRepositoryOutputPort = paymentRepositoryOutputPort;
+        this.insertProdutoUseCase = insertProdutoUseCase;
+    }
 
     @Override
     public String createPayment(PaymentDTO paymentDTO) throws MPException, MPApiException {
@@ -132,7 +127,7 @@ public class PaymentUseCase implements PaymentInputPort {
     @Override
     public void insertPayment(PaymentDTO paymentDTO) {
         if (paymentDTO != null) {
-            paymentRepositoryAdapter.save(new PaymentEntity(paymentDTO));
+            paymentRepositoryOutputPort.save(new PaymentEntity(paymentDTO));
             var idProduto = paymentDTO.getProdutos();
             idProduto
                     .forEach(p -> {
