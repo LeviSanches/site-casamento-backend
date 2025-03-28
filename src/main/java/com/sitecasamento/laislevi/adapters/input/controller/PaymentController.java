@@ -5,6 +5,7 @@ import com.mercadopago.exceptions.MPException;
 import com.sitecasamento.laislevi.application.core.domain.DTOs.PaymentDTO;
 import com.sitecasamento.laislevi.application.core.services.MercadoPagoService;
 import com.sitecasamento.laislevi.application.core.usecase.PaymentUseCase;
+import com.sitecasamento.laislevi.application.ports.input.PaymentInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 public class PaymentController {
 
     @Autowired
-    private PaymentUseCase paymentUseCase;
+    private PaymentInputPort paymentInputPort;
 
     @Autowired
     private MercadoPagoService mercadoPagoService;
@@ -29,7 +30,7 @@ public class PaymentController {
         }
 
         try {
-            var response = paymentUseCase.createPayment(paymentDTO);
+            var response = paymentInputPort.createPayment(paymentDTO);
             String jsonResponse = "{\"url\": \"" + response + "\"}";
             return ResponseEntity.status(HttpStatus.OK).body(jsonResponse);
         } catch (Exception e) {
@@ -44,7 +45,7 @@ public class PaymentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro: Dados inválidos");
         }
         try {
-            paymentUseCase.insertPayment(paymentDTO);
+            paymentInputPort.insertPayment(paymentDTO);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
             e.printStackTrace();

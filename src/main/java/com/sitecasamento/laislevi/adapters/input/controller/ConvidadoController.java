@@ -4,6 +4,9 @@ import com.sitecasamento.laislevi.application.core.domain.DTOs.ConvidadoDTO;
 import com.sitecasamento.laislevi.application.core.usecase.DeleteConvidadoUseCase;
 import com.sitecasamento.laislevi.application.core.usecase.InsertConvidadoUseCase;
 import com.sitecasamento.laislevi.application.core.usecase.SearchConvidadoUseCase;
+import com.sitecasamento.laislevi.application.ports.input.DeleteConvidadoInputPort;
+import com.sitecasamento.laislevi.application.ports.input.InsertConvidadoInputPort;
+import com.sitecasamento.laislevi.application.ports.input.SearchConvidadoInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,28 +19,28 @@ import java.util.List;
 public class ConvidadoController {
 
     @Autowired
-    private InsertConvidadoUseCase insertConvidadoUseCase;
+    private InsertConvidadoInputPort insertConvidadoInputPort;
 
     @Autowired
-    private DeleteConvidadoUseCase deleteConvidadoUseCase;
+    private DeleteConvidadoInputPort deleteConvidadoInputPort;
 
     @Autowired
-    private SearchConvidadoUseCase searchConvidadoUseCase;
+    private SearchConvidadoInputPort searchConvidadoInputPort;
 
     @GetMapping()
     public ResponseEntity<List<ConvidadoDTO>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(searchConvidadoUseCase.searchAll());
+        return ResponseEntity.status(HttpStatus.OK).body(searchConvidadoInputPort.searchAll());
     }
 
     @PostMapping()
     public ResponseEntity<Void> insert(@RequestBody ConvidadoDTO convidado) {
-        insertConvidadoUseCase.insert(convidado);
+        insertConvidadoInputPort.insert(convidado);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable final Long id) {
-        deleteConvidadoUseCase.delete(id);
+        deleteConvidadoInputPort.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
