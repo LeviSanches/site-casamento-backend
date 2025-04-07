@@ -23,7 +23,7 @@ public class InsertConvidadoUseCase implements InsertConvidadoInputPort {
             for (AcompanhanteDTO acompanhanteDTO : convidadoDTO.getAcompanhantes()) {
                 if(!acompanhanteDTO.getNome().isBlank() || !acompanhanteDTO.getNome().isEmpty()) {
                     AcompanhanteEntity acompanhante = new AcompanhanteEntity(acompanhanteDTO);
-                    convidado.addAcompgitanhante(acompanhante);
+                    convidado.addAcompanhante(acompanhante);
                 }
             }
             convidadoRepositoryOutputPort.save(convidado);

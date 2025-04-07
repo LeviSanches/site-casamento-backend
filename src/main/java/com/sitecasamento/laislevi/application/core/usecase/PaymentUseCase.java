@@ -131,7 +131,7 @@ public class PaymentUseCase implements PaymentInputPort {
             var idProduto = paymentDTO.getProdutos();
             idProduto
                     .forEach(p -> {
-                        if (p.getId() != null) {
+                        if (p.getId() != null && p.getPreco() > 500) {
                             insertProdutoUseCase.updateAvailability(p.getId());
                         }
                     });

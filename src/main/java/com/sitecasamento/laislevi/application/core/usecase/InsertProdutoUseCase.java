@@ -23,7 +23,6 @@ public class InsertProdutoUseCase implements InsertProdutoInputPort {
                     .map(ProdutoEntity::new)
                     .forEach(p -> {
                         p.setId(null);
-                        System.out.println(p);
                         produtoRepositoryOutputPort.save(p);
                     });
         }
